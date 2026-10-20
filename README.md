@@ -2,6 +2,13 @@
 
 Aplicacao web simples para cadastrar e consultar contatos usando React no frontend, Node/Express no backend e Azure Table Storage como persistencia.
 
+## Desenvolvido Por:
+
+- Gabriel Garcia
+- Levi Ferreira
+- Thiago de Almeida
+- André Luiz
+
 ## Requisitos
 
 - Node.js 18 ou superior
