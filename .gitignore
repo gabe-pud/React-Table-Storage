@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.local
+dist
+.terraform
+*.tfstate
+*.tfstate.*
+terraform/terraform.tfvars
+.DS_Store
+api.zip

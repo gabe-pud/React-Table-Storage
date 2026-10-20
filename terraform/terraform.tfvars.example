@@ -1,0 +1,6 @@
+subscription_id = "00000000-0000-0000-0000-000000000000"
+location        = "brazilsouth"
+project_name    = "contactledger"
+environment     = "dev"
+api_sku         = "B1"
+table_name      = "Contacts"
