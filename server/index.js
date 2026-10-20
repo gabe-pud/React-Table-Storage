@@ -9,6 +9,16 @@ const port = Number(process.env.PORT || 3001);
 const tableName = process.env.AZURE_TABLE_NAME || 'Contacts';
 const partitionKey = 'contacts';
 const memoryContacts = [];
+const configuredOrigins = (process.env.FRONTEND_ORIGINS || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const corsOptions = {
+  origin: configuredOrigins.length
+    ? (origin, callback) => callback(null, !origin || configuredOrigins.includes(origin))
+    : true,
+};
 
 const client = createTableClient();
 
@@ -53,7 +63,8 @@ async function listContacts() {
   return contacts.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
-app.use(cors());
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(express.json());
 
 app.get('/api/health', (_request, response) => {

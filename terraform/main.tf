@@ -65,6 +65,10 @@ resource "azurerm_linux_web_app" "api" {
   site_config {
     always_on = var.api_sku != "F1"
 
+    cors {
+      allowed_origins = [trimsuffix(azurerm_storage_account.data.primary_web_endpoint, "/")]
+    }
+
     application_stack {
       node_version = "20-lts"
     }
@@ -77,6 +81,7 @@ resource "azurerm_linux_web_app" "api" {
     SCM_DO_BUILD_DURING_DEPLOYMENT    = "true"
     AZURE_TABLE_NAME                  = azurerm_storage_table.contacts.name
     AZURE_STORAGE_CONNECTION_STRING = azurerm_storage_account.data.primary_connection_string
+    FRONTEND_ORIGINS                  = trimsuffix(azurerm_storage_account.data.primary_web_endpoint, "/")
   }
 
   tags = local.tags
